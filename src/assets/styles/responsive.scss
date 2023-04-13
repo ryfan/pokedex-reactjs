@@ -1,0 +1,103 @@
+@mixin media($size) {
+ @if $size ==phone-only {
+  @media (max-width: 415px) {
+   @content;
+  }
+ }
+
+ @else if $size ==big-desktop-up {
+  @media (min-width: 1800px) {
+   @content;
+  }
+ }
+
+ @else if $size ==tablet-portrait-up {
+  @media (min-width: 600px) and (max-width: 1199px) {
+   @content;
+  }
+ }
+
+ @else if $size ==tablet-landscape-up {
+  @media (min-width: 900px) and (max-width: 1199px) {
+   @content;
+  }
+ }
+
+ @else if $size ==desktop-up {
+  @media (min-width: 1200px) and (max-width: 1799px) {
+   @content;
+  }
+ }
+
+ @else if $size ==iphone-xr { 
+    @media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 2) { 
+        @content;
+    }
+}
+}
+
+// Alternative with media query
+// Mixin for media query breakpoints
+@mixin bp($point) {
+ $bp-mobile: "screen and (max-device-width: 480px)";
+ $bp-mobilepl: "screen and (max-device-width: 640px)";
+ $bp-iphone4: "screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2)";
+ $bp-iphone5: "(device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2)";
+ $bp-iphone6: "(min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3)";
+ $bp-tablet: "screen and (min-device-width: 768px)";
+ $bp-laptop: "screen and (min-width: 1024px)";
+ $bp-television: "screen and (min-width: 1480px)";
+
+ @if $point ==mobile {
+  @media #{$bp-mobile} {
+   @content;
+  }
+ }
+
+ @if $point ==mobilepl {
+  @media #{$bp-mobilepl} {
+   @content;
+  }
+ }
+
+ @if $point ==iphone4 {
+  @media #{$bp-iphone4} {
+   @content;
+  }
+ }
+
+ @if $point ==iphone5 {
+  @media #{$bp-iphone5} {
+   @content;
+  }
+ }
+
+ @if $point ==iphone6 {
+  @media #{$bp-iphone6} {
+   @content;
+  }
+ }
+
+ @if $point ==tablet {
+  @media #{$bp-tablet} {
+   @content;
+  }
+ }
+
+ @if $point ==laptop {
+  @media #{$bp-laptop} {
+   @content;
+  }
+ }
+
+ @if $point ==television {
+  @media #{$bp-television} {
+   @content;
+  }
+ }
+}
+
+// end mixin bp

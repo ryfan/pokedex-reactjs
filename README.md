@@ -5,7 +5,7 @@ Ant Design Mobile
 PokéAPI
 Vercel
 
-# Environtment
+# Environment
 file .env / .env.local
 ```
 REACT_APP_TITLE="Pokédex"

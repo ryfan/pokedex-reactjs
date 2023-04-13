@@ -1,0 +1,13 @@
+@import '../../../assets/styles/coloring.scss';
+
+.pokedex {
+ &__footer {
+  flex: 0;
+  box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 70px;
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  background: $white-color;
+ }
+}

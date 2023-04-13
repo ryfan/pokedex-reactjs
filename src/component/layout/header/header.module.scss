@@ -1,0 +1,26 @@
+@import '../../../assets/styles/responsive.scss';
+@import '../../../assets/styles/coloring.scss';
+
+.pokedex {
+ &__header {
+  top: 0;
+  flex: 0;
+  position: sticky;
+  width: 415px;
+  background: $white-color;
+  box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 70px;
+  z-index: 999;
+
+  &__image {
+   padding: 5px
+  }
+ }
+}
+
+@include media(phone-only) {
+ .pokedex {
+  &__header {
+   width: 100%;
+  }
+ }
+}

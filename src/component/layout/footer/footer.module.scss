@@ -1,13 +1,24 @@
+@import '../../../assets/styles/responsive.scss';
 @import '../../../assets/styles/coloring.scss';
 
 .pokedex {
  &__footer {
   flex: 0;
   box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 70px;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 999;
-  width: 100%;
+  width: 415px;
   background: $white-color;
+  height: 60px;
+  padding: 8px 8px;
+ }
+}
+
+@include media(phone-only) {
+ .pokedex {
+  &__footer {
+   width: 100%;
+  }
  }
 }

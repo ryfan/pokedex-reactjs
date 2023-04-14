@@ -3,14 +3,13 @@
 
 .pokedex {
  &__header {
-  top: 0;
   flex: 0;
-  position: sticky;
+  position: fixed;
   width: 415px;
   background: $white-color;
   box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 70px;
   z-index: 999;
-
+  height: 60px;
   &__image {
    padding: 5px
   }

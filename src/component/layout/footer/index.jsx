@@ -44,7 +44,7 @@ export default function Footer() {
 
  return (
   <div className={styles.pokedex__footer}>
-   <TabBar activeKey={activeMenu ? activeMenu : pathname}>
+   <TabBar activeKey={activeMenu ? activeMenu : pathname} safeArea={true}>
     {tabs.map((item) => (
      <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
     ))}

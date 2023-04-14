@@ -1,5 +1,9 @@
 import { Modal, TabBar } from 'antd-mobile';
-import { AppOutline, InformationCircleOutline } from 'antd-mobile-icons';
+import {
+ AppOutline,
+ HeartOutline,
+ InformationCircleOutline
+} from 'antd-mobile-icons';
 import React, { useState } from 'react';
 import styles from './footer.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -46,8 +50,22 @@ export default function Footer() {
     ))}
    </TabBar>
    <Modal
+    title="Credits"
     visible={visible}
-    content="人在天边月上明"
+    content={
+     <div style={{ textAlign: 'center' }}>
+      <p>Author by</p>
+      <p>Ryfan Aditya Indra</p>
+      <p>Software Engineer Frontend</p>
+      <br />
+      <p>RestAPI Pokedex by</p>
+      <p>PokeAPI</p>
+      <br />
+      <p>
+       Made with <HeartOutline /> at Bogor
+      </p>
+     </div>
+    }
     onClose={hideModal}
     closeOnMaskClick={true}
    />

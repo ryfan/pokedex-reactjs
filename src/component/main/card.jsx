@@ -28,7 +28,7 @@ export default function CardComponent({ id, name, types, image }) {
       }}
      >
       <span style={{ fontSize: 15 }}>#</span>
-      <span style={{ fontSize: 20 }}>{id}</span>
+      <span style={{ fontSize: 16 }}>{id}</span>
      </div>
      <div
       style={{
@@ -42,7 +42,7 @@ export default function CardComponent({ id, name, types, image }) {
        textTransform: 'Capitalize'
       }}
      >
-      <span style={{ fontSize: 18 }}>{name}</span>
+      <span style={{ fontSize: 16 }}>{name}</span>
      </div>
     </Grid.Item>
     <Grid.Item>

@@ -44,7 +44,10 @@ export default function Main() {
    <Base>
     <Card
      title="Here's your pokemon"
-     style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 0px 12px 2px' }}
+     style={{
+      boxShadow: 'rgba(149, 157, 165, 0.2) 0px 0px 12px 2px',
+      marginBottom: 60
+     }}
     >
      {Loading ? (
       <Grid columns={1}>

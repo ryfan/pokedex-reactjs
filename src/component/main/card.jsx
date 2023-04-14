@@ -1,48 +1,23 @@
-import { Image, Card, Grid, Tag } from 'antd-mobile';
 import React from 'react';
+import { Image, Card, Grid, Tag } from 'antd-mobile';
 import { background } from '../../utils/variable';
 import { map } from 'lodash';
+import styles from './card.module.scss';
 
 export default function CardComponent({ id, name, types, image }) {
  return (
   <Card
-   style={{
-    height: 150,
-    width: '100%',
-    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 0px 12px 2px',
-    background: background[types[0].type.name],
-    cursor: 'pointer'
-   }}
+   style={{ background: background[types[0].type.name] }}
+   className={styles.pokedex__card}
   >
    <Grid columns={1}>
     <Grid.Item>
-     <div
-      style={{
-       position: 'relative',
-       color: 'rgba(240, 240, 240, 0.5)',
-       marginTop: -10,
-       marginRight: -5,
-       fontWeight: 'bold',
-       padding: 5,
-       float: 'right'
-      }}
-     >
-      <span style={{ fontSize: 15 }}>#</span>
-      <span style={{ fontSize: 16 }}>{id}</span>
+     <div className={styles.pokedex__card__body__right}>
+      <span className={styles.pokedex__card__body__right__hastag}>#</span>
+      <span className={styles.pokedex__card__body__right__number}>{id}</span>
      </div>
-     <div
-      style={{
-       position: 'relative',
-       color: 'rgba(240, 240, 240, 1)',
-       marginTop: -10,
-       marginLeft: -5,
-       fontWeight: 'bold',
-       padding: 5,
-       float: 'left',
-       textTransform: 'Capitalize'
-      }}
-     >
-      <span style={{ fontSize: 16 }}>{name}</span>
+     <div className={styles.pokedex__card__body__left}>
+      <span className={styles.pokedex__card__body__left__name}>{name}</span>
      </div>
     </Grid.Item>
     <Grid.Item>
@@ -51,29 +26,22 @@ export default function CardComponent({ id, name, types, image }) {
        <Image src={image} width="100%" height="100px" />
       </Grid.Item>
       <Grid.Item>
-       <div style={{ marginTop: 20 }}>
-        <Grid columns={1} gap={8}>
+       <Grid columns={1} gap={8}>
+        <div className={styles.pokedex__card__tag}>
          {map(types, (item, idx) => (
           <Grid.Item key={idx}>
-           <div style={{ marginLeft: 15 }}>
-            <Tag
-             color="white"
-             fill="outline"
-             round
-             style={{
-              textTransform: 'capitalize',
-              fontWeight: 'bold',
-              fontSize: 12,
-              padding: 5
-             }}
-            >
-             {item.type.name}
-            </Tag>
-           </div>
+           <Tag
+            color="white"
+            fill="outline"
+            round
+            className={styles.pokedex__card__tag__name}
+           >
+            {item.type.name}
+           </Tag>
           </Grid.Item>
          ))}
-        </Grid>
-       </div>
+        </div>
+       </Grid>
       </Grid.Item>
      </Grid>
     </Grid.Item>

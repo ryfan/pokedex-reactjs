@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Meta from '../../utils/meta';
-import { Card, DotLoading, Grid } from 'antd-mobile';
 import Base from '../../component/layout/base';
+import CardComponent from '../../component/main/card';
+import { AutoCenter, Card, DotLoading, Grid, SearchBar } from 'antd-mobile';
 import { readDetailPokemon, readListPokemon } from '../../services/fetch';
 import { map, orderBy } from 'lodash';
-import CardComponent from '../../component/main/card';
+import styles from './main.module.scss';
 
 export default function Main() {
  const [listPokemon, setlistPokemon] = useState([]);
@@ -42,34 +43,43 @@ export default function Main() {
   <Fragment>
    <Meta title="Home" />
    <Base>
-    <Card
-     title="Here's your pokemon"
-     style={{
-      boxShadow: 'rgba(149, 157, 165, 0.2) 0px 0px 12px 2px',
-      marginBottom: 60
-     }}
-    >
-     {Loading ? (
-      <Grid columns={1}>
-       <Grid.Item>
-        <DotLoading />
-       </Grid.Item>
-      </Grid>
-     ) : (
-      <Grid columns={2} gap={8}>
-       {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
-        <Grid.Item key={idx}>
-         <CardComponent
-          id={lP.id}
-          name={lP.name}
-          types={lP.types}
-          image={lP.sprites.other.dream_world.front_default}
-         />
-        </Grid.Item>
-       ))}
-      </Grid>
-     )}
-    </Card>
+    <Grid columns={1} gap={12}>
+     <Grid.Item>
+      <SearchBar
+       placeholder="Search your Pokémon"
+       showCancelButton
+       cancelText="Clear"
+       style={{ '--height': '40px' }}
+      />
+     </Grid.Item>
+     <Grid.Item>
+      <Card title="Here's your Pokémon" className={styles.pokedex__card}>
+       {Loading ? (
+        <Grid columns={1}>
+         <Grid.Item>
+          <AutoCenter>
+           <span>Loading</span>
+           <DotLoading />
+          </AutoCenter>
+         </Grid.Item>
+        </Grid>
+       ) : (
+        <Grid columns={2} gap={12}>
+         {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
+          <Grid.Item key={idx}>
+           <CardComponent
+            id={lP.id}
+            name={lP.name}
+            types={lP.types}
+            image={lP.sprites.other.dream_world.front_default}
+           />
+          </Grid.Item>
+         ))}
+        </Grid>
+       )}
+      </Card>
+     </Grid.Item>
+    </Grid>
    </Base>
   </Fragment>
  );

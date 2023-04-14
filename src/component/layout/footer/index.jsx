@@ -53,13 +53,13 @@ export default function Footer() {
     title="Credits"
     visible={visible}
     content={
-     <div style={{ textAlign: 'center' }}>
+     <div>
       <p>Author by</p>
       <p>Ryfan Aditya Indra</p>
       <p>Software Engineer Frontend</p>
       <br />
-      <p>RestAPI Pokedex by</p>
-      <p>PokeAPI</p>
+      <p>Restful API Pokédex by</p>
+      <p>PokéAPI</p>
       <br />
       <p>
        Made with <HeartOutline /> at Bogor

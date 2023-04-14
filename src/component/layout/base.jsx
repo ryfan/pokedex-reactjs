@@ -9,7 +9,7 @@ export default function Base({ children }) {
   <div className={styles.pokedex__layout}>
    <Header />
    <div className={styles.pokedex__layout__content}>
-    <Grid columns={1} gap={8}>
+    <Grid columns={1} gap={18}>
      <Grid.Item>
       <SearchBar
        placeholder="Search your pokemon"

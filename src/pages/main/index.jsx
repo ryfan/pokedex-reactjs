@@ -6,10 +6,12 @@ import { AutoCenter, Card, DotLoading, Grid, SearchBar } from 'antd-mobile';
 import { readDetailPokemon, readListPokemon } from '../../services/fetch';
 import { map, orderBy } from 'lodash';
 import styles from './main.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
  const [listPokemon, setlistPokemon] = useState([]);
  const [Loading, setLoading] = useState(false);
+ const navigate = useNavigate();
  const fetchlistPokemon = async () => {
   try {
    setLoading(true);
@@ -39,47 +41,54 @@ export default function Main() {
   fetchData();
  }, []);
 
+ const onClickPokemon = (id) => {
+  navigate(`/pokemon/${id}`);
+ };
+
  return (
   <Fragment>
    <Meta title="Home" />
    <Base>
-    <Grid columns={1} gap={12}>
-     <Grid.Item>
-      <SearchBar
-       placeholder="Search your Pokémon"
-       showCancelButton
-       cancelText="Clear"
-       style={{ '--height': '40px' }}
-      />
-     </Grid.Item>
-     <Grid.Item>
-      <Card title="Here's your Pokémon" className={styles.pokedex__card}>
-       {Loading ? (
-        <Grid columns={1}>
-         <Grid.Item>
-          <AutoCenter>
-           <span>Loading</span>
-           <DotLoading />
-          </AutoCenter>
-         </Grid.Item>
-        </Grid>
-       ) : (
-        <Grid columns={2} gap={12}>
-         {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
-          <Grid.Item key={idx}>
-           <CardComponent
-            id={lP.id}
-            name={lP.name}
-            types={lP.types}
-            image={lP.sprites.other.dream_world.front_default}
-           />
+    <div className={styles.pokedex__main}>
+     <Grid columns={1} gap={12}>
+      <Grid.Item>
+       <SearchBar
+        placeholder="Search your Pokémon"
+        showCancelButton
+        cancelText="Clear"
+        style={{ '--height': '40px' }}
+       />
+      </Grid.Item>
+      <Grid.Item>
+       <Card title="Here's your Pokémon" className={styles.pokedex__main__card}>
+        {Loading ? (
+         <Grid columns={1}>
+          <Grid.Item>
+           <AutoCenter>
+            <span>Loading</span>
+            <DotLoading />
+           </AutoCenter>
           </Grid.Item>
-         ))}
-        </Grid>
-       )}
-      </Card>
-     </Grid.Item>
-    </Grid>
+         </Grid>
+        ) : (
+         <Grid columns={2} gap={12}>
+          {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
+           <Grid.Item key={idx}>
+            <CardComponent
+             id={lP.id}
+             name={lP.name}
+             types={lP.types}
+             image={lP.sprites.other.dream_world.front_default}
+             onclick={onClickPokemon}
+            />
+           </Grid.Item>
+          ))}
+         </Grid>
+        )}
+       </Card>
+      </Grid.Item>
+     </Grid>
+    </div>
    </Base>
   </Fragment>
  );

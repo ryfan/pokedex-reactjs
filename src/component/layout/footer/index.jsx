@@ -1,14 +1,16 @@
-import { Modal, TabBar } from 'antd-mobile';
+import { Modal, TabBar, Toast } from 'antd-mobile';
 import {
+ AntOutline,
  AppOutline,
  HeartOutline,
  InformationCircleOutline
 } from 'antd-mobile-icons';
 import React, { useState } from 'react';
 import styles from './footer.module.scss';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function Footer() {
+ const { id } = useParams();
  const [activeMenu, setactiveMenu] = useState(undefined);
  const [visible, setvisible] = useState(false);
  const navigate = useNavigate();
@@ -31,6 +33,24 @@ export default function Footer() {
    key: '/',
    title: 'Home',
    icon: <AppOutline onClick={Home} />
+  },
+  {
+   key: `/pokemon/${id}`,
+   title: 'Detail',
+   icon: (
+    <AntOutline
+     onClick={
+      id
+       ? null
+       : () => {
+          Toast.show({
+           content: 'Select pokemon first!',
+           position: 'bottom'
+          });
+         }
+     }
+    />
+   )
   },
   {
    key: '/about',

@@ -3,7 +3,8 @@ import {
  AntOutline,
  AppOutline,
  HeartOutline,
- InformationCircleOutline
+ InformationCircleOutline,
+ SearchOutline
 } from 'antd-mobile-icons';
 import React, { useState } from 'react';
 import styles from './footer.module.scss';
@@ -11,6 +12,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function Footer() {
  const { id } = useParams();
+ const location = useLocation();
+ const { pathname } = location;
  const [activeMenu, setactiveMenu] = useState(undefined);
  const [visible, setvisible] = useState(false);
  const navigate = useNavigate();
@@ -21,11 +24,15 @@ export default function Footer() {
 
  const hideModal = () => {
   setvisible(false);
-  setactiveMenu('/');
+  id ? setactiveMenu(`/pokemon/${id}`) : setactiveMenu(pathname);
  };
 
  const Home = () => {
   navigate('/');
+ };
+
+ const Search = () => {
+  navigate('/search');
  };
 
  const tabs = [
@@ -33,6 +40,11 @@ export default function Footer() {
    key: '/',
    title: 'Home',
    icon: <AppOutline onClick={Home} />
+  },
+  {
+   key: '/search',
+   title: 'Search',
+   icon: <SearchOutline onClick={Search} />
   },
   {
    key: `/pokemon/${id}`,
@@ -44,7 +56,7 @@ export default function Footer() {
        ? null
        : () => {
           Toast.show({
-           content: 'Select pokemon first!',
+           content: 'Select pokemon first 👋',
            position: 'bottom'
           });
          }
@@ -58,9 +70,6 @@ export default function Footer() {
    icon: <InformationCircleOutline onClick={showModal} />
   }
  ];
-
- const location = useLocation();
- const { pathname } = location;
 
  return (
   <div className={styles.pokedex__footer}>

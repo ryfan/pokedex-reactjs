@@ -18,34 +18,24 @@ html {
  background-color: #EAEAEA !important;
 }
 
-@include media(big-desktop-up) {
- .ant-menu-horizontal .ant-menu-item {
-  width: 83px;
-  text-align: center;
- }
+.adm-result-page-icon {
+ display: none !important;
 }
 
-@include media(desktop-up) {
- .ant-menu-horizontal .ant-menu-item {
-  width: 83px;
-  text-align: center;
- }
-}
-
-@include media(tablet-portrait-up) {
- .ant-menu-horizontal .ant-menu-item {
-  width: 20vw;
-  text-align: center;
- }
+.adm-popup-body-position-bottom {
+ width: 415px;
+ bottom: 60px;
+ right: 25%;
+ left: 50%;
+ margin-left: -207px;
 }
 
 @include media(phone-only) {
- .ant-menu-horizontal .ant-menu-item {
-  width: 82px;
-  text-align: center;
+ .adm-popup-body-position-bottom {
+  width: 100%;
+  left: 0;
+  bottom: 60px;
+  margin-left: unset;
+  right: unset;
  }
-}
-
-.adm-result-page-icon {
- display: none !important;
 }

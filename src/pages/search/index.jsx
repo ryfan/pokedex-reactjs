@@ -2,38 +2,25 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Meta from '../../utils/meta';
 import Base from '../../component/layout/base';
 import CardComponent from '../../component/main/card';
-import { AutoCenter, Card, DotLoading, Grid, Picker } from 'antd-mobile';
+import {
+ AutoCenter,
+ Button,
+ Card,
+ DotLoading,
+ Grid,
+ Picker,
+ Space
+} from 'antd-mobile';
 import { readDetailPokemon, readListPokemon } from '../../services/fetch';
 import { map, orderBy } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { capitalize, lowercase } from '../../utils/string';
-import styles from './main.module.scss';
+import styles from './search.module.scss';
+import { UndoOutline } from 'antd-mobile-icons';
 
-export default function Main() {
+export default function Search() {
  const [listPokemon, setlistPokemon] = useState([]);
- const [Loading, setLoading] = useState(false);
  const navigate = useNavigate();
- const fetchlistPokemon = async () => {
-  try {
-   setLoading(true);
-   const params = {
-    limit: 20,
-    offset: 0
-   };
-   const getListData = await readListPokemon(params);
-   const listDetailPokemon = [];
-   map(getListData.results, async (lP) => {
-    const getDetailData = await readDetailPokemon(lP.name);
-    listDetailPokemon.push(getDetailData);
-   });
-   setlistPokemon(listDetailPokemon);
-   setTimeout(() => {
-    setLoading(false);
-   }, 1000);
-  } catch (error) {
-   console.log(error);
-  }
- };
 
  const onClickPokemon = (id) => {
   navigate(`/pokemon/${id}`);
@@ -45,6 +32,7 @@ export default function Main() {
  const [loadingList, setloadingList] = useState(false);
  const fetchlistSearchPokemon = async () => {
   try {
+   setLoading(true);
    setVisible(true);
    setloadingList(true);
    const params = {
@@ -70,15 +58,18 @@ export default function Main() {
   }
  };
 
+ const [loading, setLoading] = useState(true);
  useEffect(() => {
   async function fetchData() {
    if (value) {
+    setLoading(true);
     const listDetailPokemon = [];
     const getDetailData = await readDetailPokemon(lowercase(value));
     listDetailPokemon.push(getDetailData);
     setlistPokemon(listDetailPokemon);
+    setLoading(false);
    } else {
-    await fetchlistPokemon();
+    await fetchlistSearchPokemon();
    }
   }
   fetchData();
@@ -86,23 +77,22 @@ export default function Main() {
 
  return (
   <Fragment>
-   <Meta title="Home" />
+   <Meta title="Search" />
    <Base searchPokemon={fetchlistSearchPokemon}>
-    <div className={styles.pokedex__main}>
-     <Grid columns={1} gap={12}>
+    <div className={styles.pokedex__search}>
+     <Grid columns={1}>
       <Grid.Item>
-       <Card title="Here's your Pokémon" className={styles.pokedex__main__card}>
-        {Loading ? (
-         <Grid columns={1}>
-          <Grid.Item>
-           <AutoCenter>
-            <span>Loading</span>
-            <DotLoading />
-           </AutoCenter>
-          </Grid.Item>
-         </Grid>
+       <Card
+        title="Here's your Pokémon"
+        className={styles.pokedex__search__card}
+       >
+        {loading ? (
+         <AutoCenter>
+          <span>Loading</span>
+          <DotLoading />
+         </AutoCenter>
         ) : (
-         <Grid columns={2} gap={12}>
+         <Grid columns={1} gap={8}>
           {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
            <Grid.Item key={idx}>
             <CardComponent
@@ -115,24 +105,38 @@ export default function Main() {
            </Grid.Item>
           ))}
           <Grid.Item>
-           <Picker
-            columns={searchPokemon}
-            visible={visible}
-            onClose={() => {
-             setVisible(false);
-            }}
-            value={value}
-            onConfirm={(v) => {
-             setValue(v);
-            }}
-            loading={loadingList}
-            destroyOnClose={true}
-            confirmText="Select"
-            cancelText="Cancel"
-           />
+           <AutoCenter>
+            <Button
+             onClick={fetchlistSearchPokemon}
+             size="small"
+             fill="solid"
+             color="primary"
+             loading={loadingList}
+            >
+             <Space wrap>
+              <UndoOutline />
+              Reset
+             </Space>
+            </Button>
+           </AutoCenter>
           </Grid.Item>
          </Grid>
         )}
+        <Picker
+         columns={searchPokemon}
+         visible={visible}
+         onClose={() => {
+          setVisible(false);
+         }}
+         value={value}
+         onConfirm={(v) => {
+          setValue(v);
+         }}
+         loading={loadingList}
+         destroyOnClose={true}
+         confirmText="Select"
+         cancelText="Cancel"
+        />
        </Card>
       </Grid.Item>
      </Grid>

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { readDetailPokemon } from '../../../services/fetch';
 import { DotLoading, Image, ResultPage } from 'antd-mobile';
 import { background } from '../../../utils/variable';
+import { capitalize } from '../../../utils/string';
 
 export default function Detail() {
  const [dataPokemon, setdataPokemon] = useState(null);
@@ -32,15 +33,13 @@ export default function Detail() {
   }
  };
 
- console.log(dataPokemon);
-
  return (
-  <Fragment>
-   <Meta title="Detail" />
-   <Base>
-    {Loading ? (
-     <DotLoading />
-    ) : (
+  <Base>
+   {Loading ? (
+    <DotLoading />
+   ) : (
+    <Fragment>
+     <Meta title={capitalize(dataPokemon.name)} />
      <ResultPage
       style={{
        '--background-color': background[dataPokemon.types[0].type.name]
@@ -65,8 +64,8 @@ export default function Detail() {
        />
       }
      />
-    )}
-   </Base>
-  </Fragment>
+    </Fragment>
+   )}
+  </Base>
  );
 }

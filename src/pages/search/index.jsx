@@ -136,6 +136,9 @@ export default function Search() {
          destroyOnClose={true}
          confirmText="Select"
          cancelText="Cancel"
+         onCancel={() => {
+          setLoading(false);
+         }}
         />
        </Card>
       </Grid.Item>

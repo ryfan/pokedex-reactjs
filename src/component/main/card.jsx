@@ -4,11 +4,12 @@ import { background } from '../../utils/variable';
 import { map } from 'lodash';
 import styles from './card.module.scss';
 
-export default function CardComponent({ id, name, types, image }) {
+export default function CardComponent({ id, name, types, image, onclick }) {
  return (
   <Card
    style={{ background: background[types[0].type.name] }}
    className={styles.pokedex__card}
+   onClick={() => onclick(name)}
   >
    <Grid columns={1}>
     <Grid.Item>

@@ -1,6 +1,10 @@
 .pokedex {
- &__card {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 12px 2px;
-  margin-bottom: 60px;
+ &__main {
+  padding: 12px;
+
+  &__card {
+   box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 12px 2px;
+   margin-bottom: 60px;
+  }
  }
 }

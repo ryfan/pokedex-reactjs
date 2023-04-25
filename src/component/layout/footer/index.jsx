@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import styles from './footer.module.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-export default function Footer() {
+export default function Footer({ baseColor }) {
  const { id } = useParams();
  const location = useLocation();
  const { pathname } = location;
@@ -72,7 +72,10 @@ export default function Footer() {
  ];
 
  return (
-  <div className={styles.pokedex__footer}>
+  <div
+   className={styles.pokedex__footer}
+   style={baseColor ? { '--adm-color-primary': baseColor } : undefined}
+  >
    <TabBar activeKey={activeMenu ? activeMenu : pathname} safeArea={true}>
     {tabs.map((item) => (
      <TabBar.Item key={item.key} icon={item.icon} title={item.title} />

@@ -17,7 +17,7 @@ export default function Header() {
   >
    <div className={styles.pokedex__header__image}>
     <AutoCenter>
-     <Image src="/logo.svg" width={110} />
+     <Image src="/logo.svg" width={110} lazy={true} />
     </AutoCenter>
    </div>
   </NavBar>

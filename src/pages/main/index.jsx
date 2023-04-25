@@ -106,7 +106,7 @@ export default function Main() {
           {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
            <Grid.Item key={idx}>
             <CardComponent
-             id={lP.id}
+             id={String(lP.id).padStart(3, '0')}
              name={lP.name}
              types={lP.types}
              image={lP.sprites.other.dream_world.front_default}

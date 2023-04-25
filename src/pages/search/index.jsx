@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Meta from '../../utils/meta';
 import Base from '../../component/layout/base';
-import CardComponent from '../../component/main/card';
+import CardComponent from '../../component/search/card';
 import {
  AutoCenter,
  Button,
@@ -85,6 +85,20 @@ export default function Search() {
        <Card
         title="Here's your Pokémon"
         className={styles.pokedex__search__card}
+        extra={
+         <Button
+          onClick={fetchlistSearchPokemon}
+          fill="solid"
+          color="primary"
+          loading={loading}
+          size="mini"
+         >
+          <Space wrap>
+           <UndoOutline />
+           Reset
+          </Space>
+         </Button>
+        }
        >
         {loading ? (
          <AutoCenter>
@@ -104,22 +118,11 @@ export default function Search() {
             />
            </Grid.Item>
           ))}
-          <Grid.Item>
+          {listPokemon.length === 0 ? (
            <AutoCenter>
-            <Button
-             onClick={fetchlistSearchPokemon}
-             size="small"
-             fill="solid"
-             color="primary"
-             loading={loadingList}
-            >
-             <Space wrap>
-              <UndoOutline />
-              Reset
-             </Space>
-            </Button>
+            <span>Click button "Reset" for search your Pokemon</span>
            </AutoCenter>
-          </Grid.Item>
+          ) : null}
          </Grid>
         )}
         <Picker

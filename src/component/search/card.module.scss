@@ -1,0 +1,55 @@
+.pokedex {
+ &__card {
+  height: 140px;
+  width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 12px 2px;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 1000ms;
+
+  &__right {
+   position: relative;
+   color: rgba(240, 240, 240, 1);
+   font-weight: bold;
+   padding: 5;
+   float: right;
+   text-transform: capitalize;
+
+   &__name {
+    font-size: 28px;
+   }
+
+   &__id {
+    position: absolute;
+    color: rgba(240, 240, 240, 0.5);
+    font-weight: bold;
+
+    &__hastag {
+     font-size: 10px;
+    }
+
+    &__number {
+     font-size: 16px;
+    }
+   }
+  }
+
+  &__tag {
+   float: right;
+
+   &__name {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+    float: right;
+    margin-bottom: 5px;
+   }
+  }
+ }
+
+ &__card:hover {
+  transition: transform 800ms;
+  transform: translateY(-8px);
+ }
+}

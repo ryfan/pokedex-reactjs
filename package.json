@@ -1,6 +1,11 @@
 {
  "name": "pokedex-reactjs",
  "version": "1.0.0",
+ "author": {
+  "name": "Ryfan Aditya Indra",
+  "email": "me@ryfanai.com",
+  "url": "https://pokedex.ryfanai.com"
+ },
  "private": true,
  "dependencies": {
   "@testing-library/jest-dom": "^5.16.5",
@@ -18,7 +23,7 @@
   "web-vitals": "^2.1.4"
  },
  "scripts": {
-  "start": "react-scripts start",
+  "start": "GENERATE_SOURCEMAP=false react-scripts start",
   "build": "GENERATE_SOURCEMAP=false react-scripts build",
   "test": "react-scripts test",
   "eject": "react-scripts eject"

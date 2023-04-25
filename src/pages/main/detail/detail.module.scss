@@ -1,2 +1,25 @@
 // Detail Styling
 
+.pokedex {
+ &__detail {
+
+  &__tag {
+   margin-top: 20px;
+
+   &__name {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 8px;
+    float: right;
+    margin-bottom: 5px;
+   }
+  }
+
+  &__card {
+   border-radius: unset !important;
+   margin-top: -10px;
+   // padding: unset !important;
+  }
+ }
+}

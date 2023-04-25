@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import "./responsive.scss";
+@import "./coloring.scss";
 
 * {
  margin: 0;
@@ -15,7 +16,7 @@ html {
  -moz-osx-font-smoothing: grayscale;
  height: 100%;
  overscroll-behavior-y: contain;
- background-color: #EAEAEA !important;
+ background-color: #d4d4d4 !important;
 }
 
 .adm-result-page-icon {
@@ -30,6 +31,58 @@ html {
  margin-left: -207px;
 }
 
+.adm-result-page-footer {
+ display: none;
+}
+
+.adm-result-page-header {
+ background-color: $white-color !important;
+}
+
+.adm-result-page-content {
+ padding: unset !important;
+}
+
+.adm-result-page{
+ background-color: $white-color !important;
+}
+
+@include media(desktop-up) {
+ .adm-result-page-bg {
+  --width: 415px !important;
+  left: -20px !important;
+  width: 415px;
+  margin-top: -50px;
+ }
+}
+
+@include media(big-desktop-up) {
+ .adm-result-page-bg {
+  --width: 415px !important;
+  left: -20px !important;
+  width: 415px;
+  margin-top: -50px;
+ }
+}
+
+@include media(tablet-portrait-up) {
+ .adm-result-page-bg {
+  --width: 415px !important;
+  left: -20px !important;
+  width: 415px;
+  margin-top: -50px;
+ }
+}
+
+@include media(tablet-landscape-up) {
+ .adm-result-page-bg {
+  --width: 415px !important;
+  left: -20px !important;
+  width: 415px;
+  margin-top: -50px;
+ }
+}
+
 @include media(phone-only) {
  .adm-popup-body-position-bottom {
   width: 100%;
@@ -37,5 +90,11 @@ html {
   bottom: 60px;
   margin-left: unset;
   right: unset;
+ }
+
+ .adm-result-page-bg {
+  --width: 470px !important;
+  left: -22px !important;
+  width: 101vw;
  }
 }

@@ -18,3 +18,7 @@ export async function readListPokemon(queries) {
 export async function readDetailPokemon(params) {
  return await readData(`${endpoints.DETAIL_POKEMON}/${params}`);
 }
+
+export async function readEvolutionPokemon(params) {
+ return await readData(`${endpoints.EVOLUTION_POKEMON}/${params}`);
+}

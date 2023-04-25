@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { capitalize, lowercase } from '../../utils/string';
 import styles from './search.module.scss';
 import { UndoOutline } from 'antd-mobile-icons';
+import { background } from '../../utils/variable';
 
 export default function Search() {
  const [listPokemon, setlistPokemon] = useState([]);
@@ -78,8 +79,23 @@ export default function Search() {
  return (
   <Fragment>
    <Meta title="Search" />
-   <Base searchPokemon={fetchlistSearchPokemon}>
-    <div className={styles.pokedex__search}>
+   <Base
+    searchPokemon={fetchlistSearchPokemon}
+    baseColor={
+     listPokemon.length > 0
+      ? background[listPokemon[0].types[0].type.name]
+      : undefined
+    }
+   >
+    <div
+     className={styles.pokedex__search}
+     style={{
+      '--adm-color-primary':
+       listPokemon.length > 0
+        ? background[listPokemon[0].types[0].type.name]
+        : undefined
+     }}
+    >
      <Grid columns={1}>
       <Grid.Item>
        <Card
@@ -110,7 +126,7 @@ export default function Search() {
           {map(orderBy(listPokemon, ['id'], ['asc']), (lP, idx) => (
            <Grid.Item key={idx}>
             <CardComponent
-             id={lP.id}
+             id={String(lP.id).padStart(3, '0')}
              name={lP.name}
              types={lP.types}
              image={lP.sprites.other.dream_world.front_default}

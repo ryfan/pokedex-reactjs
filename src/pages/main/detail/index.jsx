@@ -25,7 +25,8 @@ import styles from './detail.module.scss';
 const { Step } = Steps;
 export default function Detail() {
  const [dataPokemon, setdataPokemon] = useState(null);
- const [dataEvolution, setdataEvolution] = useState([]);
+ const [listPokemonEvolution, setlistPokemonEvolution] = useState([]);
+ const navigate = useNavigate();
  const [Loading, setLoading] = useState(true);
  const { id } = useParams();
 
@@ -58,46 +59,40 @@ export default function Detail() {
 
      response = response['evolves_to'][0];
     } while (!!response && response.hasOwnProperty('evolves_to'));
-    setdataEvolution(evolutionData);
+    const listDetailPokemon = [];
+    map(evolutionData, async (dE) => {
+     const getDetailData = await readDetailPokemon(dE.species_name);
+     listDetailPokemon.push(getDetailData);
+    });
+    setlistPokemonEvolution(listDetailPokemon);
+    setTimeout(() => {
+     setLoading(false);
+    }, 1000);
    }
   } catch (error) {
    console.log(error);
-  }
- };
-
- const [listPokemonEvolution, setlistPokemonEvolution] = useState([]);
- const onDetailsEvolution = async (dataEvolution) => {
-  try {
-   const listDetailPokemon = [];
-   map(dataEvolution, async (dE) => {
-    const getDetailData = await readDetailPokemon(dE.species_name);
-    listDetailPokemon.push(getDetailData);
-   });
-   setlistPokemonEvolution(listDetailPokemon);
    setTimeout(() => {
     setLoading(false);
    }, 1000);
-  } catch (error) {
-   console.log(error);
   }
  };
 
- useEffect(() => {
-  async function fetchData() {
-   await onDetailsEvolution(dataEvolution);
-  }
-  fetchData();
- }, [dataEvolution]);
-
- const navigate = useNavigate();
  return (
-  <Base>
+  <Base
+   baseColor={
+    dataPokemon ? background[dataPokemon.types[0].type.name] : undefined
+   }
+  >
    {Loading ? (
     <DotLoading />
    ) : (
     <Fragment>
      <Meta title={capitalize(dataPokemon.name)} />
-     <div className={styles.pokedex__detail}>
+     <div
+      style={{
+       '--adm-color-primary': background[dataPokemon.types[0].type.name]
+      }}
+     >
       <ResultPage
        style={{
         '--background-color': background[dataPokemon.types[0].type.name]
@@ -158,6 +153,7 @@ export default function Detail() {
            alt={dataPokemon.name}
            width="100%"
            height="150px"
+           lazy={true}
           />
          </div>
         </Grid.Item>
@@ -201,6 +197,7 @@ export default function Detail() {
                  width="100%"
                  height="150px"
                  onClick={() => navigate(`/pokemon/${lPE.name}`)}
+                 lazy={true}
                 />
                }
                key={idx}

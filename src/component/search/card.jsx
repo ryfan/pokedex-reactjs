@@ -17,7 +17,7 @@ export default function CardComponent({ id, name, types, image, onclick }) {
       <span className={styles.pokedex__card__right__id__hastag}>#</span>
       <span className={styles.pokedex__card__right__id__number}>{id}</span>
      </div>
-     <Image src={image} width="100%" height="120px" />
+     <Image src={image} width="100%" height="120px" lazy={true} />
     </Grid.Item>
     <Grid.Item>
      <Grid columns={1}>

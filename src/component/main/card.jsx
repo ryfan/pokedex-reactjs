@@ -24,7 +24,7 @@ export default function CardComponent({ id, name, types, image, onclick }) {
     <Grid.Item>
      <Grid columns={2}>
       <Grid.Item>
-       <Image src={image} width="100%" height="100px" />
+       <Image src={image} width="100%" height="100px" lazy={true} />
       </Grid.Item>
       <Grid.Item>
        <Grid columns={1} gap={8}>

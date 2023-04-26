@@ -6,7 +6,7 @@ import styles from './base.module.scss';
 export default function Base({ children, baseColor }) {
  return (
   <div className={styles.pokedex__layout}>
-   <Header />
+   <Header baseColor={baseColor} />
    <div className={styles.pokedex__layout__content}>{children}</div>
    <Footer baseColor={baseColor} />
   </div>

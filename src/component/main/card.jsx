@@ -18,7 +18,7 @@ export default function CardComponent({ id, name, types, image, onclick }) {
       <span className={styles.pokedex__card__body__right__number}>{id}</span>
      </div>
      <div className={styles.pokedex__card__body__left}>
-      <span className={styles.pokedex__card__body__left__name}>{name}</span>
+      <p className={styles.pokedex__card__body__left__name}>{name}</p>
      </div>
     </Grid.Item>
     <Grid.Item>

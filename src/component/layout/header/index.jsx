@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './header.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ baseColor }) {
  const { id } = useParams();
  const navigate = useNavigate();
  const onHome = () => {
@@ -14,6 +14,7 @@ export default function Header() {
    backArrow={id ? true : false}
    className={styles.pokedex__header}
    onBack={onHome}
+   style={baseColor ? { color: baseColor } : undefined}
   >
    <div className={styles.pokedex__header__image}>
     <AutoCenter>

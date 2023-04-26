@@ -7,8 +7,10 @@ import {
  readEvolutionPokemon
 } from '../../../services/fetch';
 import {
+ AutoCenter,
  Card,
  DotLoading,
+ ErrorBlock,
  Grid,
  Image,
  ResultPage,
@@ -21,14 +23,16 @@ import { background } from '../../../utils/variable';
 import { capitalize } from '../../../utils/string';
 import { map } from 'lodash';
 import styles from './detail.module.scss';
+import CardComponent from '../../../component/search/card';
 
 const { Step } = Steps;
 export default function Detail() {
+ const { id } = useParams();
+ const navigate = useNavigate();
+
  const [dataPokemon, setdataPokemon] = useState(null);
  const [listPokemonEvolution, setlistPokemonEvolution] = useState([]);
- const navigate = useNavigate();
  const [Loading, setLoading] = useState(true);
- const { id } = useParams();
 
  useEffect(() => {
   async function fetchData() {
@@ -84,8 +88,15 @@ export default function Detail() {
    }
   >
    {Loading ? (
-    <DotLoading />
-   ) : (
+    <div style={{ padding: 12 }}>
+     <Card style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}>
+      <AutoCenter>
+       <span>Loading</span>
+       <DotLoading />
+      </AutoCenter>
+     </Card>
+    </div>
+   ) : dataPokemon ? (
     <Fragment>
      <Meta title={capitalize(dataPokemon.name)} />
      <div
@@ -122,21 +133,19 @@ export default function Detail() {
         </span>
        }
        description={
-        <Fragment>
-         <Space>
-          {map(dataPokemon.types, (item, idx) => (
-           <Tag
-            key={idx}
-            color="white"
-            fill="outline"
-            round
-            className={styles.pokedex__detail__tag__name}
-           >
-            {item.type.name}
-           </Tag>
-          ))}
-         </Space>
-        </Fragment>
+        <Space>
+         {map(dataPokemon.types, (item, idx) => (
+          <Tag
+           key={idx}
+           color="white"
+           fill="outline"
+           round
+           className={styles.pokedex__detail__tag__name}
+          >
+           {item.type.name}
+          </Tag>
+         ))}
+        </Space>
        }
       >
        <Grid columns={1} gap={8}>
@@ -149,7 +158,10 @@ export default function Detail() {
           }}
          >
           <Image
-           src={dataPokemon.sprites.other.dream_world.front_default}
+           src={
+            dataPokemon.sprites.other.dream_world.front_default ??
+            '/no_image_available.svg'
+           }
            alt={dataPokemon.name}
            width="100%"
            height="150px"
@@ -161,43 +173,25 @@ export default function Detail() {
          <Card className={styles.pokedex__detail__card}>
           <Tabs defaultActiveKey="1">
            <Tabs.Tab title="About" key="1">
-            <table width="100%">
-             <tbody>
-              <tr>
-               <th align="left">Species</th>
-               <th>{dataPokemon.species.name}</th>
-              </tr>
-              <tr>
-               <th>Species</th>
-               <th>{dataPokemon.species.name}</th>
-              </tr>
-              <tr>
-               <th>Species</th>
-               <th>{dataPokemon.species.name}</th>
-              </tr>
-              <tr>
-               <th>Species</th>
-               <th>{dataPokemon.species.name}</th>
-              </tr>
-             </tbody>
-            </table>
+            Lorem Ipsum
            </Tabs.Tab>
            <Tabs.Tab title="Statistics" key="2">
-            2
+            Lorem Ipsum
            </Tabs.Tab>
            <Tabs.Tab title="Evolution" key="3">
             <Steps current={1} direction="vertical">
              {map(listPokemonEvolution, (lPE, idx) => (
               <Step
-               title={<h3>{capitalize(lPE.name)}</h3>}
                description={
-                <Image
-                 src={lPE.sprites.other.dream_world.front_default}
-                 alt={lPE.name}
-                 width="100%"
-                 height="150px"
-                 onClick={() => navigate(`/pokemon/${lPE.name}`)}
-                 lazy={true}
+                <CardComponent
+                 id={String(lPE.id).padStart(3, '0')}
+                 name={lPE.name}
+                 types={lPE.types}
+                 image={
+                  lPE.sprites.other.dream_world.front_default ??
+                  '/no_image_available.svg'
+                 }
+                 onclick={() => navigate(`/pokemon/${lPE.name}`)}
                 />
                }
                key={idx}
@@ -207,7 +201,7 @@ export default function Detail() {
             </Steps>
            </Tabs.Tab>
            <Tabs.Tab title="Moves" key="4">
-            4
+            Lorem Ipsum
            </Tabs.Tab>
           </Tabs>
          </Card>
@@ -216,6 +210,19 @@ export default function Detail() {
       </ResultPage>
      </div>
     </Fragment>
+   ) : (
+    <div style={{ padding: 12 }}>
+     <Card style={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}>
+      <ErrorBlock
+       title="404 Not Found"
+       image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+       style={{
+        '--image-height': '150px'
+       }}
+       description={<span>Your Destination Has Been Moved or Removed</span>}
+      ></ErrorBlock>
+     </Card>
+    </div>
    )}
   </Base>
  );

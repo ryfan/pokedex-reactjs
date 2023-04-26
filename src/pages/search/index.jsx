@@ -129,7 +129,10 @@ export default function Search() {
              id={String(lP.id).padStart(3, '0')}
              name={lP.name}
              types={lP.types}
-             image={lP.sprites.other.dream_world.front_default}
+             image={
+              lP.sprites.other.dream_world.front_default ??
+              '/no_image_available.svg'
+             }
              onclick={onClickPokemon}
             />
            </Grid.Item>

@@ -28,18 +28,22 @@
     position: relative;
     color: rgba(240, 240, 240, 1);
     font-weight: bold;
-    padding: 5;
     float: left;
     text-transform: capitalize;
 
     &__name {
      font-size: 16px;
+     white-space: nowrap;
+     width: 90px;
+     overflow: hidden;
+     text-overflow: ellipsis;
     }
    }
   }
 
   &__tag {
    margin-top: 20px;
+
    &__name {
     text-transform: capitalize;
     font-weight: bold;
